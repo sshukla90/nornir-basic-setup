@@ -1,0 +1,24 @@
+hostname R
+!
+ip domain-name ttlzero.com
+!
+username cisco priv 15 password cisco
+!
+crypto key generate rsa mod 1024
+!
+ip ssh ver 2
+!
+line vty 0 4
+ login local 
+ transport input all 
+!
+vrf def MGMT
+ address-family ipv4
+!
+int g0/1
+ vrf forwarding MGMT
+ ip add 192.168.159.202 255.255.255.0
+ no shutdown
+!
+exit
+!
